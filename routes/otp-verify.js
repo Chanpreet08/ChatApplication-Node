@@ -13,7 +13,8 @@ var randomOptions = {
 }
 router.use(morgan('dev'));
 router.use(bodyParser.json());
-router.route('/otp-verify')
+
+router.route('/otp-request')
 .get((req,res,next)=>{
     res.json({'test':'initial test'});
 })
@@ -33,7 +34,12 @@ router.route('/otp-verify')
     else{
         res.json({'success':false,'msg':'Invalid Path'});
     }
-})
+});
+
+router.route('/otp-verify')
+.post((req,res,next)=>{
+    
+});
 
 module.exports = router;
 
