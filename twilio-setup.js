@@ -9,7 +9,7 @@ methods.testfunction = function(){
     console.log('testing function');
 }
 
-methods.sendSms=function(toPhoneNumber,fromPhoneNumber,body){
+methods.sendSms = function(toPhoneNumber,fromPhoneNumber,body){
 
     var client = new twilio(accountSid,accountAuth);
     
