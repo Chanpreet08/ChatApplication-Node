@@ -9,7 +9,10 @@
   "author": "Chanpreet Singh Chhabra",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "random-number": "0.0.9",
     "socket.io": "^2.0.4",
     "twilio": "^3.11.0"
   }
