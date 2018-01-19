@@ -5,12 +5,8 @@ var bodyParser = require('body-parser');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var twilioSetup = require('./twilio-setup');
 var otpVerify = require('./routes/otp-verify');
 
-var toPhoneNumber = '+919602976558';
-var fromPhoneNumber = '+16148080260';
-var body = 'Testing Twilio';
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
