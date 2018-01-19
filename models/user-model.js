@@ -7,7 +7,8 @@ var userSchema = new Schema({
     firstName:String,
     lastName:String,
     phoneNumber:Number,
-    otp:Number
+    otp:Number,
+    authenticated:Boolean
 });
 
 var userModel = mongoose.model('user',userSchema);

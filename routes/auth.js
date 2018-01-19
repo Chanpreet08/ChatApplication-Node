@@ -42,6 +42,7 @@ router.route('/otp-request')
                 user.lastName = lastName;
                 user.phoneNumber = phoneNumber;
                 user.otp = otp;
+                user.authenticated = false;
                 user.save((err)=>{
                     if(err){
                         console.log('error in creating user');
@@ -54,10 +55,9 @@ router.route('/otp-request')
                 user.lastName = data.lastName;
                 user.phoneNumber = data.phoneNumber;
                 user.otp =otp;
+                user.authenticated = data.authenticated;
                 userModel.findOneAndUpdate({'_id':user._id},{'otp':otp},(err,dt)=>{if(err)throw err;});
             }
-            console.log(otp);
-            console.log('user:'+user);
             var client = new twilio(accountSid,accountAuth);   
             client.messages.create({
             to: '+91'+phoneNumber,
@@ -83,7 +83,22 @@ router.route('/otp-request')
 
 router.route('/otp-verify')
 .post((req,res,next)=>{
-    
+    var id = req.body.id;
+    var otp = req.body.otp;
+
+    userModel.findOne({'_id':id}).exec((err,data)=>{
+
+        if(err){
+            res.json({'success':false,'msg':'error'});
+        }
+        if(otp == data.otp){
+            userModel.findOneAndUpdate({'_id':id},{'authenticated':true},(err)=>{if(err)console.log(err)});
+            res.json({'success':true,'msg':'success'});
+        }
+        else{
+            res.json({'success':true,'msg':'failed'});
+        }
+    });
 });
 
 module.exports = router;
