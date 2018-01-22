@@ -5,11 +5,12 @@ var morgan = require('morgan');
 var rn = require('random-number');
 var twilio = require('twilio');
 var mongoose = require('mongoose');
-var configVariables = require('../config');
 var userModel = require('../models/user-model');
 
 var accountSid = process.env.accountSid;
 var accountAuth = process.env.accountAuth;
+var fromPhoneNumber = process.env.fromPhoneNumber;
+
 var randomOptions = {
     min:1,
     max:1000000,
@@ -29,7 +30,7 @@ router.route('/otp-request')
         var phoneNumber = req.body.phoneNumber;
         var otp = rn(randomOptions);
         var body = "One time password is:"+otp;
-        var fromPhoneNumber = configVariables.fromPhoneNumber;
+        var fromPhoneNumber = fromPhoneNumber;
         var user = new userModel();
 
         userModel.findOne({phoneNumber:phoneNumber}).exec((err,data)=>{
