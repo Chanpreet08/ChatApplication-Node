@@ -7,7 +7,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var auth = require('./routes/auth');
-var mongodbUrl = "mongodb://127.0.0.1/chat";
+var mongodbUrl = process.env.mongoUrl;
 
 mongoose.connect(mongodbUrl);
 mongoose.Promise = global.Promise;
