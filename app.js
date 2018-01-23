@@ -7,6 +7,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var auth = require('./routes/auth');
+var login = require('./routes/login');
+var setup = require('./routes/setup');
 var mongodbUrl = process.env.mongoUrl;
 
 mongoose.connect(mongodbUrl);
@@ -19,6 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/authenticate',auth);
+app.use('/auth',login);
+app.use('/setup',setup);
 
 app.get('/', function(req, res) {
    res.sendfile('./public/login.html');
