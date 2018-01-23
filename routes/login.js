@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
-var config = require('../config');
 var userModel = require('../models/user-model');
 
 var app = express();
@@ -17,11 +16,11 @@ router.route('/login')
     if(token){
         var phoneNumber = req.body.phoneNumber;
         var password = req.body.password;
-
+        var secretKey = process.env.secretKey;
         userModel.findOne({phoneNumber:phoneNumber},(err,user)=>{
 
             if(bcrypt.compareSync(password,user.password)){
-                jwt.verify(token,config.secret,(err,decoded)=>{
+                jwt.verify(token,secretKey,(err,decoded)=>{
                     if(err){
                         res.json({success:false,'msg':'error in validating token'});
                     }else{
