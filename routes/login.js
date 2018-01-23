@@ -89,6 +89,7 @@ router.route('/login')
     });
 });
 
+var test
 router.route('/register')
 .post((req,res)=>{
     var user = new userModel();
