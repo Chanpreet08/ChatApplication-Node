@@ -16,6 +16,7 @@ var randomOptions = {
     max:1000000,
     integer:true
 }
+
 router.use(morgan('dev'));
 router.use(bodyParser.json());
 
