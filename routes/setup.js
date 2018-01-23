@@ -13,7 +13,8 @@ router.route('/')
         lastName:'Chhabra',
         phoneNumber:'9602976558',
         password:'chanpreet',
-        admin:true
+        admin:true,
+        token:""
     });
     
     sampleUser.save((err)=>{
