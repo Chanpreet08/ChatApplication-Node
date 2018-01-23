@@ -26,6 +26,10 @@ var userSchema = new Schema({
     },
     admin:{
         type:Boolean
+    },
+    token:{
+        type:String,
+        unique:true
     }
 
 });
