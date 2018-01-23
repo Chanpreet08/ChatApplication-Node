@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/authenticate',auth);
-app.use('/auth',login);
+app.use('/api',login);
 app.use('/setup',setup);
 
 app.get('/', function(req, res) {
