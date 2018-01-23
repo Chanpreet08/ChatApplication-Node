@@ -10,13 +10,14 @@ var userModel = require('../models/user-model');
 var app = express();
 var router =express.Router();
 
+var secretKey = process.env.secretKey;
 router.route('/login')
 .post((req,res)=>{
     var token = req.body.token;
     if(token){
         var phoneNumber = req.body.phoneNumber;
         var password = req.body.password;
-        var secretKey = process.env.secretKey;
+        
         userModel.findOne({phoneNumber:phoneNumber},(err,user)=>{
 
             if(bcrypt.compareSync(password,user.password)){
@@ -59,7 +60,7 @@ router.route('/register')
     const payload = {
         phoneNumber:user.phoneNumber
     };
-    var token = jwt.sign(payload,config.secret,{expiresIn:'1440m'});
+    var token = jwt.sign(payload,secretKey,{expiresIn:'1440m'});
     user.token = token;
     user._id = mongoose.Types.ObjectId();
     user.save(user,(err,data)=>{
